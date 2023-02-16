@@ -1,0 +1,25 @@
+import pandas as pd
+import numpy as np
+url = 'http://winterolympicsmedals.com/medals.csv'
+dataframe = pd.read_csv(url)
+#Exercise
+'''
+Ex1: Tìm số lượng huy chương của một mục bất kì
+Ex2: Tìm số huy chương vàng theo môn thi cá nhân của một nước
+Ex3: Loc ra các thể loại huy chương, tính mean, tính tổng....
+'''
+#Bài 1
+ex1 = dataframe.groupby(['Sport'])['Medal'].count()
+print(ex1)
+print("---------------")
+#Bài 2
+ex2 = dataframe[((dataframe['Medal'] == 'Gold') & (dataframe['NOC'] == 'USA') & (dataframe['Event'] == 'individual'))]['Medal'].count()
+print(ex2)
+print("---------------")
+#Bài 3
+ex3 = dataframe.groupby(['Medal'])['Medal'].count()
+sum = (dataframe.groupby(['Medal'])['Medal'].count()).sum()
+mean = (dataframe.groupby(['Medal'])['Medal'].count()).mean()
+max = (dataframe.groupby(['Medal'])['Medal'].count()).max()
+min = (dataframe.groupby(['Medal'])['Medal'].count()).min()
+print(ex3)
